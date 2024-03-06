@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <meta name="description" content="A media company." />
+  <title>Tender Magic</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Musicstyle.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+
+  <script src="main.js" type="module" id="main-script"></script>
+  <script type="text/javascript" src="/_secret-link/browserdj/public/javascripts/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="/_secret-link/browserdj/public/javascripts/jquery-ui-10.0.2.min.js"></script>
+  <script type="text/javascript"
+    src="/_secret-link/browserdj/public/stylesheets/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/_secret-link/browserdj/public/javascripts/d3.v3.min.js"></script>
+  <script type="text/javascript" src="/_secret-link/browserdj/public/javascripts/base64-binary.js"></script>
+
+</head>
+
+<body>
+
+  <div id="render"></div>
+  <script>
+
+    function fadeToBlack() {
+      return new Promise(function (resolve) {
+        var render = document.getElementById("render");
+        render.style.opacity = "1";
+        render.addEventListener("transitionend", resolve, { once: true });
+      });
+    }
+
+    function fadeToClear() {
+      return new Promise(function (resolve) {
+        var render = document.getElementById("render");
+        render.style.opacity = "0";
+        render.addEventListener("transitionend", resolve, { once: true });
+      });
+    }
+
+    $(document).ready(function () { fadeToClear(); });
+    function destroyProgram() {
+      document.getElementById('contact-form').remove();
+      document.getElementById('email-container').remove();
+      document.getElementById("nav-bar").style.visibility = 'visible';
+    }
+
+  </script>
+
+  <script>
+
+    function displayMessage(message) {
+      var messageBox = $("<div>")
+        .addClass("message-box")
+        .text(message)
+        .appendTo("body")
+        .hide()
+        .fadeIn(400);
+
+      setTimeout(function () {
+        messageBox.fadeOut(400, function () {
+          messageBox.remove();
+        });
+      }, 2000);
+    }
+
+    function submitToAPI(e) {
+
+      e.preventDefault();
+      var URL = "https://9n43zxwvtk.execute-api.us-east-1.amazonaws.com/sendEmailFunction";
+
+      var email = $("#email-input").val();
+      if (email === "") {
+        var message = "Please enter a valid email address";
+        displayMessage(message);
+        return;
+      } else {
+        var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+        if (!reeamil.test(email)) {
+          var message = "Please enter a valid email address";
+          displayMessage(message);
+          return;
+        }
+      }
+
+
+      var name = "";
+      var phone = "";
+      var email = $("#email-input").val();
+      var desc = "Email from event";
+      var data = {
+        name: name,
+        phone: phone,
+        email: email,
+        desc: desc
+      };
+
+      $.ajax({
+        type: "POST",
+        url: URL,
+        dataType: "json",
+        crossDomain: "true",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+
+
+        success: function () {
+          // clear form and show a success message
+          displayMessage("Welcome");
+          fadeToClear();
+          destroyProgram();
+        },
+        error: function () {
+          // show an error message
+        }
+      });
+
+    }
+  </script>
+  <!-- <button onclick="change_scene()" id="scene-changer">Change scene</button> -->
+  <!-- <div class="email-container" id="email-container">
+
+
+<img src="assets/program.png" id="program-image">
+
+
+<form id="contact-form" method="post" class="form" >
+  <input type="email" style="height:35px;" id="email-input" placeholder="enter email ... "
+      class="form-control"  /><br />
+  <button type="button" onClick=" submitToAPI(event); " class="btn btn-lg"
+      style="margin-top:20px;">submit</button>
+</form>
+</div> -->
+
+  <video id="video" loop muted crossOrigin="anonymous" playsinline style="display:none">
+    <source src="assets/home-video-com.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <div class="progress-bar-container">
+    <label id="loading-label" for="progress-bar"></label>
+    <progress id="progress-bar" value="0" max="100"></progress>
+  </div>
+  <div id="content-wrap">
+    <div id="static-content"></div>
+    <div style="min-width: 1500" id="webgl-content"></div>
+  </div>
+  <div class="nav-bar" display="none" id="nav-bar">
+    <div class="nav-container" id="nav-container">
+      <a class="nav-button" id="home"><img src="/_secret-link/assets/home.png" alt="Button Image"></a>
+    </div>
+  </div>
+</body>
+
+</html>

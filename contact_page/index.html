@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="author" content="mn" />
+	<link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+
+<body>
+	<!--  Import maps polyfillß -->
+	 <!-- Remove this when import maps will be widely supported -->
+	<script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../build/three.module.js",
+				"three/addons/": "../jsm/libs/draco/gltf/draco_wasm_wrapper.js"
+			}
+		}
+	</script>
+
+	<div id="input-container">
+		<!-- <button id="home-button">Home</button> -->
+	</div>
+
+
+	<script type="module">
+		import * as THREE from 'three';
+
+		import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+		import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+		import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+		import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
+		import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+		import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+
+		/**
+		 * 
+		 * 
+		 * 
+		 */
+
+		let model, group, textMesh1, textMesh2, textGeo, materials, clock, renderer, scene, camera, controls, loader2, text;
+
+		init();
+		animate();
+
+		function init() {
+			clock = new THREE.Clock();
+			const container = document.querySelector('body');
+
+			renderer = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			container.appendChild(renderer.domElement);
+
+			const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color(0xbfe999);
+			scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+			camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100);
+			camera.position.set(0, 0, 10);
+
+			controls = new Controls(camera, renderer.domElement);
+			controls.target.set(0, 0, 0);
+			controls.update();
+			controls.enablePan = false;
+			controls.enableRotate = false;
+			controls.enableDamping = true;
+			controls.minDistance = 8;
+			controls.maxDistance = 10;
+
+
+			const loader = new GLTFLoader();
+			loader.load('assets/phone.glb', function (gltf) {
+
+				model = gltf.scene;
+				model.rotation.z += 0.5;
+
+				scene.add(model);
+
+			});
+
+			//text
+
+			loader2 = new FontLoader();
+
+			const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+			scene.add(ambientLight);
+
+			const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+			dirLight.position.set(0, 1000, 0);
+			scene.add(dirLight);
+			materials = [
+				new THREE.MeshPhongMaterial({ color: 0xbfe999, flatShading: true }), // front
+				new THREE.MeshPhongMaterial({ color: 0xbfe099 }) // side
+			];
+			group = new THREE.Group();
+			group.position.y = 0;
+
+			scene.add(group);
+
+			text = "Contact"
+			refreshText()
+			window.text = text
+		}
+
+		function createText() {
+			loader2.load('assets/normal-400.json', function (font) {
+				textGeo = new TextGeometry(text, {
+					font: font,
+					size: .5,
+					height: 0.05,
+				});
+				textGeo.computeBoundingBox();
+
+				const centerOffset = - 0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+
+				textMesh1 = new THREE.Mesh(textGeo, materials);
+
+				textMesh1.position.set(-1, 3, 0)
+
+				textMesh1.rotation.x = 0;
+				textMesh1.rotation.y = Math.PI * 2;
+				textGeo = new TextGeometry("Tender Magic", {
+					font: font,
+					size: 1,
+					height: 0.05,
+				});
+				textMesh2 = new THREE.Mesh(textGeo, materials);
+
+				textMesh2.position.set(-3,2, 0)
+
+				textMesh2.rotation.x = 0;
+				textMesh2.rotation.y = Math.PI * 2;
+
+				group.add(textMesh1);
+				group.add(textMesh2);
+				scene.add(group)
+				console.log(scene)
+			})
+
+		}
+		function refreshText() {
+
+			group.remove(textMesh1);
+
+			createText();
+
+		}
+
+		window.onresize = function () {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize(window.innerWidth, window.innerHeight);
+
+		};
+
+
+		function animate() {
+
+
+			requestAnimationFrame(animate);
+
+			model.rotation.y += 0.005;
+
+			const delta = clock.getDelta();
+
+			// controls.update();
+
+			renderer.render(scene, camera);
+
+		}
+		animate();
+	</script>
+</body>
+
+</html>

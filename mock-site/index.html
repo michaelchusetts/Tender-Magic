@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <meta name="description" content="A media company." />
+    <title>Tender Magic</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        main {
+            text-align: center;
+        }
+
+        section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            min-height: 100vh;
+            min-width: 100vw;
+        }
+
+        .button-block {
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 600px;
+        }
+
+        .social {
+            display: inline-block;
+            margin: 30px;
+            cursor: pointer;
+        }
+
+        .social a {
+            display: block;
+            background: black;
+            position: relative;
+            transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(0, 0);
+            box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .social a::before {
+            dislpay: block;
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            left: -20px;
+            top: 10px;
+            background: rgba(166, 166, 166, 0.7);
+            transform: rotate(0deg) skewY(-45deg);
+        }
+
+        .social a::after {
+            dislpay: block;
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: -10px;
+            height: 20px;
+            width: 100%;
+            transform: rotate(0deg) skewX(-45deg);
+            background: rgba(132, 131, 131, 0.7);
+            transform: rotate(45deg) scewY(-45deg);
+        }
+
+        .social a:hover {
+            transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px);
+            box-shadow: -50px 50px 30px rgba(136, 96, 254, 0.5);
+        }
+
+        .social a i {
+            color: white;
+            font-size: 30pt;
+        }
+        #render {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transition: opacity 1s ease;
+  opacity: 1;
+  z-index: 998;
+  pointer-events: none;
+  top:0;
+}
+#render.fade-out {
+  animation: fade-out 0.5s ease-out;
+  visibility: hidden;
+}
+#render.fade-in {
+  animation: fade-out 0.5s ease-out;
+  visibility: hidden;
+}
+
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="button-block">
+                <!-- <div class="social" onclick="loadWorld()">
+                    <a href="#">
+                        <button style="z-index: 2; ">
+                            <h2>Enter</h2>
+                        </button>
+                    </a>
+                </div> -->
+            </div>
+            <img src="assets/home_compressed.gif"></img>
+        </section>
+    </main>
+  <div id="render"></div>
+
+    <script>
+        function fadeToBlack() {
+            return new Promise(function (resolve) {
+                var render = document.getElementById("render");
+                render.style.opacity = "1";
+                render.addEventListener("transitionend", resolve, { once: true });
+            });
+        }
+
+        function fadeToClear() {
+            return new Promise(function (resolve) {
+                var render = document.getElementById("render");
+                render.style.opacity = "0";
+                render.addEventListener("transitionend", resolve, { once: true });
+            });
+        }
+        function loadWorld() {
+            fadeToBlack().then(resolve => {
+                self.location = "_secret-link/index.html";
+
+            })
+        }
+    $(document).ready(function () { fadeToClear(); });
+
+    </script>
+</body>
+
+</html>

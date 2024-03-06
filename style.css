@@ -1,0 +1,633 @@
+* {
+  /* border: 1px solid #000000; */
+  box-sizing: border-box;
+
+}
+
+.thick-arrow-right {
+  width: 19px;
+  height: 35px;
+  border: 10px solid #333;
+  top: 50px;
+  left: 0;
+  padding: 0;
+  margin: 0;
+
+}
+
+html {
+  
+
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("/assets/drive/colorful2.png");
+  background-color: #000000;
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+h1 a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+h1 a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ca6565;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+
+
+h1 a:hover::before {
+  transform: scaleX(1);
+}
+
+
+
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+}
+
+.bg2 {
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #e5e5f7;
+  opacity: 0.1;
+  background-image: linear-gradient(30deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(150deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(30deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(150deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(60deg, #444cf777 25%, transparent 25.5%, transparent 75%, #444cf777 75%, #444cf777), linear-gradient(60deg, #444cf777 25%, transparent 25.5%, transparent 75%, #444cf777 75%, #444cf777);
+  background-size: 20px 35px;
+  background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
+  /* -webkit-mask-image: -webkit-gradient(linear, left top, left bottom,from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); */
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));
+
+
+}
+
+
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #000000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  visibility: hidden;
+  pointer-events: none;
+
+}
+
+#sidebar ul {
+  list-style: none;
+  font-size: 60px;
+  top: 120px;
+  position: absolute;
+}
+
+#sidebar li {
+  padding: 10px;
+}
+
+#sidebar li a {
+  text-decoration: none;
+  color: white;
+
+}
+
+#sidebar li a:hover {
+  color: white;
+}
+
+#menu-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  padding: 10px;
+  color: #ffffff;
+  opacity: 1;
+  font-size: 50px;
+  border-bottom: 2px dashed white;
+
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
+  line-height: 0.9em;
+
+}
+
+aside>* {
+  position: absolute;
+  z-index: 100;
+
+}
+
+#menu-button:hover {
+  cursor: pointer;
+}
+
+#sidebar.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+
+
+/* All the snapping stuff */
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+}
+
+
+/* Other styles */
+section {
+  scroll-snap-align: start;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 90px 90px rgba(0, 0, 0, 0.526);
+  top: 0;
+}
+
+section:nth-child(1n) {
+  /* background-color: #ffffff5b; */
+
+}
+
+section:nth-child(2n) {
+  background-image: url("drive/colorful3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+section:nth-child(2n) .card {
+  background-color: #f4f4f462;
+}
+
+section:nth-child(3n) {
+
+  background-image: url("drive/colorful4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+section:nth-child(3n) .card {
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 30px, rgba(0, 0, 0, 0.33) 0px 6px 6px;
+}
+
+section:nth-child(4n) {
+  /* background-color: rgb(255, 255, 255); */
+  background-image: url("office2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+section:nth-child(5n) {
+  /* background-color: rgb(255, 255, 255); */
+  background-image: url("/assets/drive/Untitled.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  justify-content: flex-start;
+  align-items: flex-end;
+  left: 300px;
+  width: 100%;
+  bottom: 10px;
+  position: absolute;
+}
+
+.container h1 a {
+  /* Fallback: Set a background color. */
+  font-size: 92px;
+  text-decoration: none;
+  color: white;
+}
+
+.gradient-text {
+  /* Fallback: Set a background color. */
+  background-color: #ffffff;
+
+  /* Create the gradient. */
+  background-image: linear-gradient(90deg,
+      #CA4246 16.666%,
+      #E16541 16.666%,
+      #E16541 33.333%,
+      #F18F43 33.333%,
+      #F18F43 50%,
+      #8B9862 50%,
+      #8B9862 66.666%,
+      #476098 66.666%,
+      #476098 83.333%,
+      #A7489B 83.333%);
+
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Animate the text when loading the element. */
+  /* This animates it on page load and when hovering out. */
+  animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+
+}
+
+.gradient-text:hover {
+  animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+}
+
+
+/* Move the background and make it smaller. */
+/* Animation shown when entering the page and after the hover animation. */
+@keyframes rainbow-text-simple-animation-rev {
+  0% {
+    background-size: 650%;
+  }
+
+  40% {
+    background-size: 650%;
+  }
+
+  100% {
+    background-size: 100%;
+  }
+}
+
+/* Move the background and make it larger. */
+/* Animation shown when hovering over the text. */
+@keyframes rainbow-text-simple-animation {
+  0% {
+    background-size: 100%;
+  }
+
+  80% {
+    background-size: 650%;
+  }
+
+  100% {
+    background-size: 650%;
+  }
+}
+
+.text--medium {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #000000;
+  visibility: hidden;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 500px);
+  gap: 20px;
+  overflow-y: visible;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 40px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card__image-container {
+  width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.card__image-container img {
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.card__content {
+  padding: 20px;
+}
+
+.card__title {
+  margin-bottom: 20px;
+}
+
+.card__info {
+  display: block;
+}
+
+.card__price {
+  margin-left: auto;
+  padding: 5px 20px;
+  background-color: #c92d2db1;
+  border-radius: 20px;
+}
+
+.overlay {
+  position: fixed;
+  background: rgba(71, 69, 69, 0.7);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 3;
+}
+
+.overlay.open {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.overlay__inner {
+  width: auto;
+  opacity: 1;
+}
+.overlay__inner img{
+  max-height: 80vh;
+}
+
+
+.gallery {
+  display: flex;
+  padding: 2px;
+  transition: 0.3s;
+}
+
+.gallery:hover .gallery__image {
+  filter: grayscale(1);
+}
+.project:hover .gallery__image {
+  filter: grayscale(0);
+}
+.gallery__column {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+
+.gallery__link {
+  margin: 2px;
+  overflow: hidden;
+}
+
+
+
+.gallery__link:hover .gallery__caption {
+  opacity: 1;
+}
+
+.gallery__thumb {
+  position: relative;
+}
+
+.gallery__image {
+  display: block;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.gallery__image:hover {
+  transform: scale(1.1);
+}
+
+.gallery__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 25px 15px 15px;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  color: white;
+  opacity: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: 0.3s;
+}
+
+.repeat-rect{
+  transform: scale(2) translate(5%, -10%) rotateY(0deg) rotate(45deg);
+}
+
+
+@media only screen and (max-width: 600px) {
+  body {
+    /* background-color: #e7e7e7; */
+    display: block;
+    
+  }
+  .repeat-rect{
+    transform: scale(2.5) translate(10%, 0%) rotateY(0deg) rotate(90deg);
+  }
+.container{
+  height: 100%;
+}
+  .container h1 a {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    left: 30%;
+    top: 10%;
+  }
+
+#sidebar ul li a{
+
+  color: #000000;
+}
+  #sidebar {
+    background-color: #f6f6f6;
+  }
+
+  #sidebar ul {
+    font-size: 20px;
+  }
+
+  #menu-button {
+font-size: 30px;
+border-color: black;
+  }
+
+  .container {
+    left: 0;
+    top: 0;
+    position: relative;
+  }
+
+  .scroll-container {
+    height: unset;
+    overflow-y: unset;
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+  }
+
+  section {
+    padding: 0;
+    width: auto;
+    min-height: 100vh;
+    box-shadow: 0px 0px 45px 45px rgba(0, 0, 0, 0.526);
+
+  }
+
+  .cards {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    padding-top: 100px;
+  }
+
+  .card {
+    grid-column-end: span 1;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 5px 9px -3px, rgba(0, 0, 0, 0.1) 0px -2px 0px inset;
+    scale: .75;
+  }
+
+  .card__image-container {
+    padding-top: 75%;
+  }
+
+  .card__content {
+    padding: 10px;
+  }
+
+  .card__title {
+    margin-bottom: 10px;
+  }
+
+  .card__price {
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+/* 
+   */
+
+
+
+.gallery {
+  display:grid;
+  width: auto;  
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+
+}
+
+.gallery:hover .gallery__image {
+  filter: unset;
+}
+.project:hover .gallery__image {
+  filter: unset;
+}
+
+.gallery__column {
+  display: unset;
+  flex-direction: unset;
+  width: unset;
+
+}
+
+.gallery__link {
+  margin: 2px;
+  overflow: hidden;
+}
+
+.project:hover .gallery__image {
+  filter: none;
+}
+
+.gallery__link:hover .gallery__caption {
+  opacity: 1;
+}
+
+.gallery__thumb {
+  position: relative;
+}
+
+.gallery__image {
+  display: block;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.gallery__image:hover {
+  transform: unset;
+}
+
+.gallery__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 25px 15px 15px;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  color: white;
+  opacity: 0;
+  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%); */
+  transition: 0.3s;
+}
+
+}

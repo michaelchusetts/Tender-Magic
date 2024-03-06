@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memes
+    </title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+
+<body>
+    <div onclick="getNav()">
+        <header>
+            <pre>
+                                   d8b                                                         d8,       
+        d8P                       88P                                                        `8P        
+     d888888P                    d88                                                                    
+       ?88' d8888b  88bd88b  d888888   d8888b  88bd88b      88bd8b,d88b  d888b8b   d888b8b    88b d8888b
+       88P d8b_,dP  88P' ?8bd8P' ?88  d8b_,dP  88P'  `      88P'`?8P'?8bd8P' ?88  d8P' ?88    88Pd8P' `P
+       88b 88b     d88   88P88b  ,88b 88b     d88          d88  d88  88P88b  ,88b 88b  ,88b  d88 88b    
+       `?8b`?888P'd88'   88b`?88P'`88b`?888P'd88'         d88' d88'  88b`?88P'`88b`?88P'`88bd88' `?888P'
+                                                                                         )88            
+                                                                                        ,88P            
+                                                                                    `?8888P             </pre>
+
+        </header>
+    </div>
+    <div class="nav-box" onclick="getNav()">
+        Menu
+   
+
+    </div>
+    <div class="content">
+        
+    <img class="shop-item" src="assets/longsleeveback.png">
+    <img class="shop-item" src="assets/longsleevefront.png">
+</div>
+
+<script>
+        function isMobileDevice() {
+            // Check if the 'max-width' media query matches
+            if (window.matchMedia("(max-width: 767px)").matches) {
+                return true; // User is on a mobile device
+            }
+            return false; // User is not on a mobile device
+        }
+        if (isMobileDevice()) {
+            // alert();
+        }
+
+            function getNav() {
+                try {
+                    var nav_button = document.getElementById('nav-box');
+                    if (nav_button.classList[0] == 'clicked') {
+                        nav_button.classList.remove('clicked')
+
+                    } else {
+
+                        nav_button.classList.add('clicked');
+                        console.log(nav_button.classList[0])
+                    }
+                } catch (err) {
+                    console.log(err)
+                }
+                //   var newElement = document.createElement('div');
+                //   newElement.className = 'growing-element';
+                //   nav-box.appendChild(newElement);
+            }
+
+
+
+    </script>
+</body>
+
+</html>

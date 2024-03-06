@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Record Audio</title>
+    <style>
+        .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#record, #stop, #send {
+  margin-top: 20px;
+  font-size: 20px;
+  padding: 10px;
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: #848484;
+  border-radius: 50%;
+  box-shadow: 0px 5px 0px #000000;
+  transition: transform 0.2s  ;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+
+}
+#record:hover, #stop:hover, #send:hover {
+    transform: scale(1.1);
+  box-shadow: 0px 10px 0px #f0f0f0;
+}
+
+#player {
+  margin-top: 20px;
+}
+
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <h1>Contact Tender Magic</h1>
+      <button id="record">Record</button>
+      <button id="stop">Stop</button>
+      <audio id="player" controls></audio>
+      <button id="send">Submit</button>
+    </div>
+  </body>
+</html>
